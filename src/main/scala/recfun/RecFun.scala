@@ -17,7 +17,7 @@ object RecFun extends RecFunInterface {
     }
     //var l: List[Char] = "())(".toList
     //println(s"March brackets ${balance(l)}")
-    var l:List[Char] = "())".toList
+    var l:List[Char] = ":-)".toList
     println(s"March brackets ${balance(l)}")
   }
 
@@ -33,11 +33,13 @@ object RecFun extends RecFunInterface {
   private def isOpenBracket(c: Char):Boolean = if (c == '(') true else false
   private def isCloseBracket(c: Char):Boolean = if(c ==')') true else false
   def matchExpression(es: ExpressionStack, lt: List[Char]): Boolean = {
-    if (!lt.isEmpty) {
+    if (lt.nonEmpty) {
       val head :: tail = lt
       if (isOpenBracket(head)) es.push(head)
-      if (isCloseBracket(head) && es.nonEmpty && isOpenBracket(es.top))
-        if (es.nonEmpty) es.pop
+      if (isCloseBracket(head)) {
+        if (es.isEmpty) es.push(head)
+        if (isOpenBracket(es.top)) es.pop
+      }
       matchExpression(es, tail)
     }
     if (es.isEmpty) true else false
@@ -51,5 +53,13 @@ object RecFun extends RecFunInterface {
   /**
    * Exercise 3
    */
-  def countChange(money: Int, coins: List[Int]): Int = 1
+    def count(value: Int, coins: List[Int]):Int = {
+      if (value == 0) return 1 // if the value of zero then there is exactly 1 way
+      if (value < 0 || coins.isEmpty) return 0
+      val head::tail = coins
+      count(value - head, coins) + count(value, tail)
+    }
+
+  def countChange(money: Int, coins: List[Int]): Int = count(money,coins)
+
 }
