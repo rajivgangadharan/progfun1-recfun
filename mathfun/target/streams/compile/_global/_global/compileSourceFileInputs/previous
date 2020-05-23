@@ -1,0 +1,1 @@
+["sbt.Task[scala.collection.immutable.Map[java.lang.String, scala.collection.Seq[scala.Tuple2[java.nio.file.Path, sbt.nio.FileStamp]]]]",{"2.13.2":{"hashes":[["/home/rajivg/Code/mathfun/src/main/scala/mathfun/MathOper.scala","5b81ece3aad897e48754690cb7c42b309f4b5b44"]],"lastModifiedTimes":[]}}]
